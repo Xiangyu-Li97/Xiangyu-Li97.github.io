@@ -1,0 +1,43 @@
+/* Modern resume styles */
+:root{
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --accent: #1464a8;
+  --muted: #5b6770;
+  --text: #0b1321;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.container{max-width:980px;margin:36px auto;padding:20px}
+.card{background:var(--card);border-radius:12px;box-shadow:0 8px 30px rgba(16,24,40,0.06);padding:28px}
+.header{display:flex;flex-direction:column;gap:10px}
+.name{font-size:2.1rem;margin:0;color:var(--accent);font-weight:600}
+.contact{font-size:0.95rem;color:var(--muted);line-height:1.5}
+.contact a{color:var(--accent);text-decoration:none}
+hr{border:0;border-top:1px solid #eef2f6;margin:20px 0}
+h2{margin:20px 0 10px;font-size:1.05rem;color:var(--accent);letter-spacing:0.2px}
+h3{margin:8px 0;font-size:1rem}
+ul,ol{margin:8px 0 18px 20px}
+.skills ul{margin:6px 0 8px 18px}
+footer{margin-top:28px;font-size:0.9rem;color:var(--muted)}
+
+/* Layout for wider screens */
+@media (min-width:840px){
+  .header{flex-direction:row;justify-content:space-between;align-items:center}
+  .contact{text-align:right}
+  .card{padding:36px}
+}
+
+/* Print-friendly rules */
+@media print{
+  html,body{background:#fff}
+  .card{box-shadow:none;border-radius:0}
+  a{color:#000;text-decoration:underline}
+  footer{display:none}
+}
+
+/* Small helper to improve table-like items */
+.contact div{margin-bottom:4px}
+
+.social a{margin-right:8px}
