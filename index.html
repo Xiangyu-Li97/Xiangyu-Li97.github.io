@@ -15,8 +15,15 @@
       <h1 class="name">Xiangyu Li</h1>
       <div class="contact">
         <div><strong>Address:</strong> No. 110 Xiangya Road, Kaifu District, Changsha City, Hunan Province, China</div>
-        <div><strong>Email:</strong> <a href="mailto:xiangyuli997@gmail.com">xiangyuli997@gmail.com</a></div>
-        <div><strong>Tel:</strong> +86 150 7494 4249</div>
+
+        <div class="contact-controls">
+          <button id="toggleContacts" aria-expanded="false" type="button">显示联系方式</button>
+          <small class="muted">联系方式默认隐藏以防爬虫</small>
+        </div>
+
+        <div><strong>Email:</strong> <span id="emailContact" class="hidden-contact" data-value="xiangyuli997@gmail.com">************</span></div>
+        <div><strong>Tel:</strong> <span id="telContact" class="hidden-contact" data-value="+86 150 7494 4249">************</span></div>
+
         <div class="social"><strong>Social:</strong> <a href="https://x.com/XianyuLi" target="_blank" rel="noopener">Twitter</a> | <a href="https://www.linkedin.com/in/%E7%A5%A5%E5%AE%87-%E6%9D%8E-27744b294/gu" target="_blank" rel="noopener">LinkedIn</a> | <a href="https://scholar.google.com/citations?user=FQlzamQAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Google Scholar</a></div>
       </div>
     </header>
@@ -133,5 +140,57 @@
     </footer>
     </div>
   </main>
+  <script>
+    (function(){
+      const btn = document.getElementById('toggleContacts');
+      const email = document.getElementById('emailContact');
+      const tel = document.getElementById('telContact');
+      if(!btn || !email || !tel) return;
+      const showText = '隐藏联系方式';
+      const hideText = '显示联系方式';
+      const AUTO_HIDE_MS = 20000; // 20 seconds
+      let autoHideTimer = null;
+
+      function clearAutoHide(){
+        if(autoHideTimer){
+          clearTimeout(autoHideTimer);
+          autoHideTimer = null;
+        }
+      }
+
+      function render(mask){
+        clearAutoHide();
+        if(mask){
+          email.textContent = '************';
+          tel.textContent = '************';
+          btn.setAttribute('aria-expanded','false');
+          btn.textContent = hideText;
+        } else {
+          const e = email.getAttribute('data-value');
+          const t = tel.getAttribute('data-value');
+          email.innerHTML = '<a href="mailto:'+e+'">'+e+'</a>';
+          tel.innerHTML = '<a href="tel:'+t.replace(/\s+/g,'')+'">'+t+'</a>';
+          btn.setAttribute('aria-expanded','true');
+          btn.textContent = showText;
+          // 自动在指定时间后重新隐藏
+          autoHideTimer = setTimeout(function(){
+            render(true);
+          }, AUTO_HIDE_MS);
+        }
+      }
+
+      // 默认隐藏联系方式以防爬虫
+      render(true);
+      btn.addEventListener('click', function(){
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        // 如果当前是显示（expanded=true），点击应隐藏（render(true))，并清除定时器
+        if(expanded){
+          render(true);
+        } else {
+          render(false);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
