@@ -3,7 +3,7 @@
 
 Welcome to my personal website!
 
-🌐 **Live Site**: [https://Xiangyu-Li97.github.io]
+🌐 **Live Site**: [https://xiangyu-li97.github.io/]
 
 ## ✨ About Me
 I’m Xiangyu Li, a PhD candidate passionate about [neuroscience, web development, AI, etc.].  
